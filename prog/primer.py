@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import argparse
 import json
 import os.path
@@ -76,13 +73,18 @@ def main():
     """
     Главная функция программы.
     """
-    file_parser = argparse.ArgumentParser(add_help=False)
-    file_parser.add_argument("filename", action="store", help="The data file name")
     parser = argparse.ArgumentParser("workers")
     parser.add_argument("--version", action="version", version="%(prog)s 0.1.0")
     subparsers = parser.add_subparsers(dest="command")
 
-    add = subparsers.add_parser("add", parents=[file_parser], help="Add a new worker")
+    add = subparsers.add_parser("add", help="Add a new worker")
+    add.add_argument(
+        "-f",
+        "--filename",
+        action="store",
+        required=True,
+        help="The data file name"
+    )
     add.add_argument(
         "-n", "--name", action="store", required=True, help="The worker's name"
     )
@@ -96,12 +98,22 @@ def main():
         help="The year of hiring",
     )
 
-    _ = subparsers.add_parser(
-        "display", parents=[file_parser], help="Display all workers"
+    display = subparsers.add_parser("display", help="Display all workers")
+    display.add_argument(
+        "-f",
+        "--filename",
+        action="store",
+        required=True,
+        help="The data file name"
     )
 
-    select = subparsers.add_parser(
-        "select", parents=[file_parser], help="Select the workers"
+    select = subparsers.add_parser("select", help="Select the workers")
+    select.add_argument(
+        "-f",
+        "--filename",
+        action="store",
+        required=True,
+        help="The data file name"
     )
     select.add_argument(
         "-P",
