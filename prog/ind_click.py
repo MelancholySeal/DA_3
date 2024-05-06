@@ -10,28 +10,34 @@ def add_student(students, full_name, group_number, grades):
     """
     grades = [float(grade) for grade in grades.split()]
     student = {
-        'full_name': full_name,
-        'group_number': group_number,
-        'grades': grades,
+        "full_name": full_name,
+        "group_number": group_number,
+        "grades": grades,
     }
     students.append(student)
-    students.sort(key=lambda item: item.get('group_number', ''))
+    students.sort(key=lambda item: item.get("group_number", ""))
 
 
 def list_students(students):
     """
     Вывести список студентов.
     """
-    line = '+-{}-+-{}-+-{}-+'.format('-' * 30, '-' * 15, '-' * 20)
+    line = "+-{}-+-{}-+-{}-+".format("-" * 30, "-" * 15, "-" * 20)
     click.echo(line)
-    click.echo('| {:^30} | {:^15} | {:^20} |'.format("Ф.И.О.", "Номер группы", "Успеваемость"))
+    click.echo(
+        "| {:^30} | {:^15} | {:^20} |".format("Ф.И.О.", "Номер группы", "Успеваемость")
+    )
     click.echo(line)
     for student in students:
-        average_grade = sum(student.get('grades', 0)) / len(student.get('grades', 1))
+        average_grade = sum(student.get("grades", 0)) / len(student.get("grades", 1))
         if average_grade > 4.0:
             click.echo(
-                '| {:<30} | {:<15} | {:<20} |'.format(student.get('full_name', ''), student.get('group_number', ''),
-                                                      ', '.join(map(str, student.get('grades', [])))))
+                "| {:<30} | {:<15} | {:<20} |".format(
+                    student.get("full_name", ""),
+                    student.get("group_number", ""),
+                    ", ".join(map(str, student.get("grades", []))),
+                )
+            )
     click.echo(line)
 
 
@@ -39,7 +45,7 @@ def save_to_json(filepath, data):
     """
     Сохранить всех студентов в файл JSON.
     """
-    with open(filepath, 'w', encoding='utf-8') as file:
+    with open(filepath, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
 
 
@@ -49,15 +55,16 @@ def load_from_json(filepath):
     """
     try:
         if os.path.exists(filepath):
-            with open(filepath, 'r', encoding='utf-8') as file:
+            with open(filepath, "r", encoding="utf-8") as file:
                 return json.load(file)
         else:
             click.echo(f"Файл {filepath} не существует.")
             return []
     except Exception as e:
-        click.echo(f"Произошла ошибка при загрузке данных из файла {filepath}: {str(e)}")
+        click.echo(
+            f"Произошла ошибка при загрузке данных из файла {filepath}: {str(e)}"
+        )
         return []
-
 
 
 @click.group()

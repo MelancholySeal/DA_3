@@ -1,0 +1,3 @@
+[tool.black]
+line-length = 79
+exclude =.git,__pycache__,prog/setup.cfg,build,dist,tests,doc,environment.yml,\.venv

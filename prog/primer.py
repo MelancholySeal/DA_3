@@ -79,11 +79,7 @@ def main():
 
     add = subparsers.add_parser("add", help="Add a new worker")
     add.add_argument(
-        "-f",
-        "--filename",
-        action="store",
-        required=True,
-        help="The data file name"
+        "-f", "--filename", action="store", required=True, help="The data file name"
     )
     add.add_argument(
         "-n", "--name", action="store", required=True, help="The worker's name"
@@ -100,20 +96,12 @@ def main():
 
     display = subparsers.add_parser("display", help="Display all workers")
     display.add_argument(
-        "-f",
-        "--filename",
-        action="store",
-        required=True,
-        help="The data file name"
+        "-f", "--filename", action="store", required=True, help="The data file name"
     )
 
     select = subparsers.add_parser("select", help="Select the workers")
     select.add_argument(
-        "-f",
-        "--filename",
-        action="store",
-        required=True,
-        help="The data file name"
+        "-f", "--filename", action="store", required=True, help="The data file name"
     )
     select.add_argument(
         "-P",
